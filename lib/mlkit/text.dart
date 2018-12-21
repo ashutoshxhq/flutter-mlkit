@@ -61,7 +61,7 @@ class _TextDetectState extends State<TextDetect> {
 
   Widget _buildListText(List < VisionText > texts) {
     if (texts == null || texts.length == 0) {
-      return Text('Empty');
+      return Container(child:Center(child:Text('Text Empty')));
     }
     return Expanded(
       child: Container(

@@ -10,9 +10,12 @@ class ImageWidget extends StatelessWidget {
       child: SizedBox(
       height: 100.0,
       width: 150.0,
-      child: file == null ?
-      new Text('Sorry nothing selected!!') :
-      new Image.file(file),
+      child: Center(
+         child: file == null ?
+          new Text('Select an Image using the FLoating Action Button') :
+          new Image.file(file),
+      )
+     
     ),
     );
   }

@@ -6,6 +6,7 @@ import 'text.dart';
 import 'face.dart';
 import 'lable.dart';
 import 'partials.dart';
+import 'about.dart';
 
 class MlApp extends StatefulWidget {
   _MlAppState createState() => _MlAppState();
@@ -21,7 +22,7 @@ class _MlAppState extends State < MlApp > {
     modeType: VisionFaceDetectorMode.Accurate,
     landmarkType: VisionFaceDetectorLandmark.All,
     classificationType: VisionFaceDetectorClassification.All,
-    minFaceSize: 0.15,
+    minFaceSize: 0.1,
     isTrackingEnabled: true
   );
   FirebaseVisionFaceDetector faceDetector = FirebaseVisionFaceDetector.instance;
@@ -36,11 +37,11 @@ class _MlAppState extends State < MlApp > {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 5,
+      length: 6,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.red,
-          title: Text('Flutter Firebase'),
+          title: Text('Exibition App'),
           bottom: TabBar(
             isScrollable: true,
             tabs: [
@@ -48,6 +49,7 @@ class _MlAppState extends State < MlApp > {
               Tab(child: TabItem("TEXTS"), ),
               Tab(child: TabItem("LABLES"), ),
               Tab(child: TabItem("FACES"), ),
+              Tab(child: TabItem("ABOUT"), ),
             ],
           ),
         ),
@@ -56,7 +58,8 @@ class _MlAppState extends State < MlApp > {
             ImageWidget(_file),
             TextDetect(_file,_currentText),
             LableDetect(_currentLabels,_file),
-            FaceDetect(_file,_face)
+            FaceDetect(_file,_face),
+            About()
           ],
         ),
 
@@ -86,9 +89,12 @@ class _MlAppState extends State < MlApp > {
               setState(() {
                 _currentText = currentText;
               });
+            } catch (e) {
+              print(e.toString());
+            }
 
-              var face =
-                await faceDetector.detectFromBinary(_file ?.readAsBytesSync(), options);
+            var face =
+                await faceDetector.detectFromBinary(_file?.readAsBytesSync());
               setState(() {
                 if (face.isEmpty) {
                   print('No face detected');
@@ -96,9 +102,6 @@ class _MlAppState extends State < MlApp > {
                   _face = face;
                 }
               });
-            } catch (e) {
-              print(e.toString());
-            }
           },
           child: new Icon(Icons.image),
         ),

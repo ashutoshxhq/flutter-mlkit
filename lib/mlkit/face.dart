@@ -22,6 +22,7 @@ class _FaceDetectState extends State<FaceDetect> {
       child: new Stack(
         children: < Widget > [
           _buildFaceImage(),
+          _showDetails(_face)
         ],
       ),
     ),
@@ -73,46 +74,46 @@ class FaceTextDetectDecoration extends Decoration {
 }
 
 
-// Widget _showDetails(List < VisionFace > faceList) {
-//   if (faceList == null || faceList.length == 0) {
-//     return new Text('', textAlign: TextAlign.center);
-//   }
-//   return new Container(
-//     child: new ListView.builder(
-//       padding: const EdgeInsets.all(10.0),
-//         itemCount: faceList.length,
-//         itemBuilder: (context, i) {
-//           checkData(faceList);
-//           return _buildRow(
-//             faceList[0].hasLeftEyeOpenProbability,
-//             faceList[0].headEulerAngleY,
-//             faceList[0].headEulerAngleZ,
-//             faceList[0].leftEyeOpenProbability,
-//             faceList[0].rightEyeOpenProbability,
-//             faceList[0].smilingProbability,
-//             faceList[0].trackingID);
-//         },
-//     ),
-//   );
-// }
+Widget _showDetails(List < VisionFace > faceList) {
+  if (faceList == null || faceList.length == 0) {
+    return new Text('', textAlign: TextAlign.center);
+  }
+  return new Container(
+    child: new ListView.builder(
+      padding: const EdgeInsets.all(10.0),
+        itemCount: faceList.length,
+        itemBuilder: (context, i) {
+          checkData(faceList);
+          return _buildRow(
+            faceList[0].hasLeftEyeOpenProbability,
+            faceList[0].headEulerAngleY,
+            faceList[0].headEulerAngleZ,
+            faceList[0].leftEyeOpenProbability,
+            faceList[0].rightEyeOpenProbability,
+            faceList[0].smilingProbability,
+            faceList[0].trackingID);
+        },
+    ),
+  );
+}
 
 
 
-// Widget _buildRow(
-//   bool leftEyeProb,
-//   double headEulerY,
-//   double headEulerZ,
-//   double leftEyeOpenProbability,
-//   double rightEyeOpenProbability,
-//   double smileProb,
-//   int tID) {
-//   return ListTile(
-//     title: new Text(
-//       "\nLeftEyeProb: $leftEyeProb \nHeadEulerY : $headEulerY \nHeadEulerZ : $headEulerZ \nLeftEyeOpenProbability : $leftEyeOpenProbability \nRightEyeOpenProbability : $rightEyeOpenProbability \nSmileProb : $smileProb \nFaceTrackingEnabled : $tID",
-//     ),
-//     dense: true,
-//   );
-// }
+Widget _buildRow(
+  bool leftEyeProb,
+  double headEulerY,
+  double headEulerZ,
+  double leftEyeOpenProbability,
+  double rightEyeOpenProbability,
+  double smileProb,
+  int tID) {
+  return ListTile(
+    title: new Text(
+      "",
+    ),
+    dense: true,
+  );
+}
 
 
 void checkData(List < VisionFace > faceList) {

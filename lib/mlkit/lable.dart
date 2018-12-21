@@ -27,7 +27,7 @@ class _LableDetectState extends State<LableDetect> {
 
   Widget _buildList(List < VisionLabel > labels) {
     if (labels == null || labels.length == 0) {
-      return new Text('Empty', textAlign: TextAlign.center);
+      return new Container(child:Center(child:Text('Lables Empty')));
     }
     return new Expanded(
       child: new Container(
